@@ -28,5 +28,5 @@ new = NEWS(
 
 db.create_all()
 
-db.session.add(new)
-db.session.commit()
+# db.session.add(new)
+# db.session.commit()
