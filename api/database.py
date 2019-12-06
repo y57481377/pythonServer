@@ -1,6 +1,6 @@
 from api import db
-from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import Column, Integer, String
+#from flask_sqlalchemy import SQLAlchemy
+#from sqlalchemy import Column, Integer, String
 
 
 

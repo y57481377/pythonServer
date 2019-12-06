@@ -1,14 +1,14 @@
 from api import apis, db
 from api.database import NEWS
-from flask import Flask, request, send_from_directory
+from flask import send_from_directory
 from flask_restful import Resource, reqparse, abort
 import os
 
 
 class News_api(Resource):
     def get(self, page):
-        news = db.session.query(NEWS).all()
-        # news = NEWS.query_filter()
+        # news = db.session.query(NEWS).all()
+        news = NEWS.query.all()
         return
 
 
