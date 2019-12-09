@@ -12,6 +12,12 @@ class NEWS(db.Model):
     createDate = db.Column(db.Integer)
     __tablename__ = 'news'
 
+    def toJson(self):
+        dic = self.__dict__
+        if "_sa_instance_state" in dic:
+            del dic["_sa_instance_state"]
+        return dic
+
 # class Users(db.Model):
 #     id = db.Column(db.Integer, nullable=False, primary_key=True)
 #     name = db.Column(db.String(20), nullable=False)
