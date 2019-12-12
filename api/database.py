@@ -6,9 +6,19 @@ from api import db
 
 class NEWS(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True, unique=True)
-    title = db.Column(db.String(80))       #标题
-    image = db.Column(db.String(200))       #图片地址
-    content = db.Column(db.Text)     #内容
+    # 文章id
+    articleID = db.Column(db.String(40), unique=True)
+    # 标题
+    title = db.Column(db.String(80))
+    # 作者
+    author = db.Column(db.String(20))
+    # 图片地址
+    image = db.Column(db.String(200))
+    # 内容
+    excerpt = db.Column(db.String(100))
+    # 文章类型
+    type = db.Column(db.Integer)
+    # 创建时间
     createDate = db.Column(db.Integer)
     __tablename__ = 'news'
 
@@ -18,6 +28,21 @@ class NEWS(db.Model):
             del dic["_sa_instance_state"]
         return dic
 
+class ARTICLE(db.Model):
+    # 文章id
+    articleID = db.Column(db.String(40), primary_key=True, unique=True)
+    # 内容
+    content = db.Column(db.Text)
+    __tablename__ = 'article'
+
+
+    def toJson(self):
+        dic = self.__dict__
+        if "_sa_instance_state" in dic:
+            del dic["_sa_instance_state"]
+        return dic
+
+
 # class Users(db.Model):
 #     id = db.Column(db.Integer, nullable=False, primary_key=True)
 #     name = db.Column(db.String(20), nullable=False)
@@ -25,12 +50,12 @@ class NEWS(db.Model):
 #     def __repr__(self):
 #         return '<User %r>' % self.name
 
-new = NEWS(
-    title = '如今你的气质里，藏着你曾走过的路、读过的书和爱过的人',
-    image = '/image/婧婧怡.jpeg',
-    content = 'TextText',
-    createDate = 123456
-)
+# new = NEWS(
+#     title = '如今你的气质里，藏着你曾走过的路、读过的书和爱过的人',
+#     image = '/image/婧婧怡.jpeg',
+#     content = 'TextText',
+#     createDate = 123456
+# )
 
 db.create_all()
 

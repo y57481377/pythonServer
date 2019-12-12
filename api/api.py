@@ -1,14 +1,17 @@
 from api import apis, db
-from api.database import NEWS
+from api.database import NEWS, ARTICLE
 from flask import send_from_directory
 from flask_restful import Resource, reqparse, abort
 import os
 
 class News(Resource):
+    def __init__(self):
+        self.parse = reqparse.RequestParser()
+        self.parse.add_argument("page", type=int, help="be  int", required=False)
+
     def get(self):
-        parse = reqparse.RequestParser()
-        parse.add_argument("page", type=int, help="be  int", required=True)
-        page = parse.parse_args().get("page")
+
+        page = self.parse.parse_args().get("page")
         news = NEWS.query.all()
 
         news_j = []
@@ -17,6 +20,15 @@ class News(Resource):
         return news_j
 
 
+class Article(Resource):
+    def __init__(self):
+        self.parse = reqparse.RequestParser()
+        self.parse.add_argument("articleID", type=str, help="be  string", required=True)
+
+    def get(self):
+        articleid = self.parse.parse_args().get("articleID")
+        article = ARTICLE.query.filter_by(articleID=articleid).first()
+        return article.toJson()
 
 imageDir = os.path.dirname(__file__) + '/image'
 #   获取图片链接
@@ -50,5 +62,6 @@ def abort_if_todo_doesnt_exist(t_id):
         abort(404, message="Todo {} doesn't exist".format(t_id))
 
 apis.add_resource(News, '/api/news')
+apis.add_resource(Article, '/api/news/article')
 apis.add_resource(Image, '/image/<imageName>')
 apis.add_resource(Report, '/api/report')
