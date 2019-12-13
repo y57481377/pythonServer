@@ -30,7 +30,9 @@ class Article(Resource):
         article = ARTICLE.query.filter_by(articleID=articleid).first()
         return article.toJson()
 
-imageDir = os.path.dirname(__file__) + '/image'
+
+
+imageDir = os.getcwd()+ '/Resource/backImage'
 #   获取图片链接
 class Image(Resource):
     def get(self, imageName):
@@ -63,5 +65,5 @@ def abort_if_todo_doesnt_exist(t_id):
 
 apis.add_resource(News, '/api/news')
 apis.add_resource(Article, '/api/news/article')
-apis.add_resource(Image, '/image/<imageName>')
+apis.add_resource(Image, '/resource/backimage/<imageName>')
 apis.add_resource(Report, '/api/report')

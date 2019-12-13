@@ -5,9 +5,9 @@ from api import db
 
 
 class NEWS(db.Model):
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True, unique=True)
+    # id = db.Column(db.Integer, primary_key=True, autoincrement=True, unique=True)
     # 文章id
-    articleID = db.Column(db.String(40), unique=True)
+    articleID = db.Column(db.String(40), primary_key=True, unique=True)
     # 标题
     title = db.Column(db.String(80))
     # 作者
@@ -50,12 +50,6 @@ class ARTICLE(db.Model):
 #     def __repr__(self):
 #         return '<User %r>' % self.name
 
-# new = NEWS(
-#     title = '如今你的气质里，藏着你曾走过的路、读过的书和爱过的人',
-#     image = '/image/婧婧怡.jpeg',
-#     content = 'TextText',
-#     createDate = 123456
-# )
 
 db.create_all()
 
